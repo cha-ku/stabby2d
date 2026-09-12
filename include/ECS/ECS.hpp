@@ -199,7 +199,9 @@ inline void Registry:: AddComponent(Entity &entity, TArgs &&...args) {
 
   componentPool->Set(entityId, newComponent);
 
-  m_entityComponentSignatures.resize(m_componentPools.size());
+  if (entityId >= m_entityComponentSignatures.size()) {
+    m_entityComponentSignatures.resize(entityId + 1);
+  }
   m_entityComponentSignatures[entityId].set(componentId);
 };
 
